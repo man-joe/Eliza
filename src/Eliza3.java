@@ -109,16 +109,15 @@ public class Eliza3{
             System.out.print("Enter your response here or Q to quit: ");
             userInput = sc.nextLine();
 
-            if (e.check(userInput)) {
+            if (e.check(userInput))
                 break;
-            }
 
             //Split String , replace words, and store into ArrayList
             brokenString = e.splitString(userInput);
 
             //Add Hedge or qualifier
             elizaOutput = e.ElizaOutput(brokenString);
-            elizaOutput = e.addHedgeOrQualifier(rnd.nextInt(2), elizaOutput);
+            elizaOutput = e.addHedgeOrQualifier(rnd.nextInt(2), elizaOutput.trim());
 
             System.out.println(elizaOutput);
         }
