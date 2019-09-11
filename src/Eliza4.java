@@ -119,12 +119,13 @@ public class Eliza4{
         Scanner sc = new Scanner(System.in);
         String userInput, elizaOutput, secretWord ="";
         ArrayList<String> brokenString;
+        ArrayList<String> chatHistory = new ArrayList<>();
         AdventureTime game;
 
         while(true) {
             System.out.print("Enter your response here or Q to quit: ");
             userInput = sc.nextLine();
-
+            chatHistory.add(userInput);
             if (e.check(userInput))
                 break;
                 //SecretWords
@@ -139,7 +140,7 @@ public class Eliza4{
                 continue;
             } else if(userInput.equalsIgnoreCase("play game")) {
                 game = new AdventureTime();
-                game.main(null);
+                game.runGame(sc);
                 sc.nextLine();
                 continue;
             }
@@ -150,12 +151,17 @@ public class Eliza4{
             //Add Hedge or qualifier
             elizaOutput = e.ElizaOutput(brokenString);
             elizaOutput = e.addHedgeOrQualifier(rnd.nextInt(2), elizaOutput.trim());
+            chatHistory.add(elizaOutput);
 
             if(secretWord.isEmpty())
                 System.out.println(elizaOutput);
             else //Secret Word modified statements
                 System.out.println(e.secretWordMod(secretWord,elizaOutput));
         }
+        System.out.println("Chat History:\n");
+        for(String s : chatHistory)
+            System.out.println(s);
+
         sc.close();
     }
 }
